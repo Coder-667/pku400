@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Book {
+  id          String    @id @default(cuid())
+  title       String
+  author      String
+  publisher   String
+  coverImage  String    @default("")
+  description String    @default("")
+  category    String    // politics | english | math_one | ds | co | os | cn
+  downloadUrl String    @default("")
+  theaLink    String    @default("")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  chapters    Chapter[]
+}
+
+model Chapter {
+  id          String     @id @default(cuid())
+  bookId      String
+  title       String
+  order       Int
+  syllabusRef String     @default("")
+  content     String     @default("")
+  book        Book       @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  exercises   Exercise[]
+
+  @@unique([bookId, order])
+}
+
+model Exercise {
+  id            String   @id @default(cuid())
+  chapterId     String
+  type          String   @default("textbook") // textbook | ai_generated
+  question      String   // Markdown
+  answer        String   @default("") // Markdown
+  explanation   String   @default("") // Markdown
+  difficulty    String   @default("medium") // easy | medium | hard
+  tags          String   @default("[]") // JSON array
+  source        String   @default("")
+  theaLink      String   @default("")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  chapter       Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+}
