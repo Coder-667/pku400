@@ -12,7 +12,9 @@ const prisma = isTurso
       }),
     })
   : new PrismaClient({
-      adapter: new PrismaBetterSqlite3({ url: "file:./dev.db" }),
+      adapter: new PrismaBetterSqlite3({
+        url: process.env.DATABASE_URL || "file:./prisma/dev.db",
+      }),
     });
 
 async function main() {
