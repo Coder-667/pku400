@@ -5,6 +5,19 @@ import { ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ChapterTabs } from "./ChapterTabs";
 
+export async function generateStaticParams() {
+  const books = await prisma.book.findMany({
+    include: { chapters: { select: { id: true } } },
+  });
+  const params: { id: string; chapterId: string }[] = [];
+  for (const book of books) {
+    for (const ch of book.chapters) {
+      params.push({ id: book.id, chapterId: ch.id });
+    }
+  }
+  return params;
+}
+
 interface ChapterPageProps {
   params: Promise<{ id: string; chapterId: string }>;
 }

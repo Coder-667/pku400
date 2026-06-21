@@ -5,6 +5,11 @@ import Link from "next/link";
 import { ChevronRight, BookOpen, Dumbbell, Download } from "lucide-react";
 import { notFound } from "next/navigation";
 
+export async function generateStaticParams() {
+  const books = await prisma.book.findMany({ select: { id: true } });
+  return books.map((b) => ({ id: b.id }));
+}
+
 interface BookDetailPageProps {
   params: Promise<{ id: string }>;
 }

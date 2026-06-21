@@ -1,8 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { BookCard } from "@/components/BookCard";
 
-export const dynamic = "force-dynamic";
-
 export default async function BooksPage() {
   const books = await prisma.book.findMany({
     include: { _count: { select: { chapters: true } } },

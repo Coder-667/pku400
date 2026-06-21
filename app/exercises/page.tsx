@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/prisma";
 import { ExerciseCard } from "@/components/ExerciseCard";
-import { Suspense } from "react";
 
 export default async function ExercisesPage() {
   const exercises = await prisma.exercise.findMany({
@@ -20,17 +19,15 @@ export default async function ExercisesPage() {
         </p>
       </div>
 
-      <Suspense fallback={<p>加载中...</p>}>
-        {exercises.length === 0 ? (
-          <p className="text-muted-foreground text-center py-12">暂无习题</p>
-        ) : (
-          <div className="grid md:grid-cols-2 gap-4">
-            {exercises.map((ex) => (
-              <ExerciseCard key={ex.id} exercise={ex} />
-            ))}
-          </div>
-        )}
-      </Suspense>
+      {exercises.length === 0 ? (
+        <p className="text-muted-foreground text-center py-12">暂无习题</p>
+      ) : (
+        <div className="grid md:grid-cols-2 gap-4">
+          {exercises.map((ex) => (
+            <ExerciseCard key={ex.id} exercise={ex} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

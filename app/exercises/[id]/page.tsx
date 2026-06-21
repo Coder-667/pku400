@@ -6,6 +6,11 @@ import { Badge } from "@/components/ui/badge";
 import { DIFFICULTY_LABELS, DIFFICULTY_COLORS } from "@/lib/utils";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 
+export async function generateStaticParams() {
+  const exercises = await prisma.exercise.findMany({ select: { id: true } });
+  return exercises.map((e) => ({ id: e.id }));
+}
+
 interface ExerciseDetailPageProps {
   params: Promise<{ id: string }>;
 }
