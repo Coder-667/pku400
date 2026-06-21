@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PKU400 — 北大软微11408备考资料库",
-  description: "北大软微11408考研备考资料收录，涵盖政治、英语一、数学一、408计算机学科专业基础综合",
+  title: "PKU400",
+  description: "北大软微11408考研备考",
 };
 
 export default function RootLayout({
