@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, Dumbbell, Home, Settings, Wrench, Cpu, Sigma } from "lucide-react";
+import { BookOpen, Dumbbell, Home, Settings, Wrench, Cpu, Sigma, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/", label: "首页", icon: Home },
   { href: "/408", label: "408", icon: Cpu },
   { href: "/math", label: "数学一", icon: Sigma },
+  { href: "/scores", label: "分数线", icon: TrendingUp },
   { href: "/books", label: "书目", icon: BookOpen },
   { href: "/exercises", label: "习题", icon: Dumbbell },
   { href: "/admin", label: "管理", icon: Settings },

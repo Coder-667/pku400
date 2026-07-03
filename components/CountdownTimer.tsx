@@ -52,20 +52,23 @@ export function CountdownTimer() {
   ];
 
   return (
-    <div className="flex items-center justify-center gap-3 md:gap-5">
-      {segments.map((seg, i) => (
-        <div key={seg.label} className="flex items-center gap-3 md:gap-5">
-          <div className="text-center min-w-[64px] md:min-w-[80px]">
-            <span className="text-5xl md:text-7xl font-mono font-bold tabular-nums text-foreground tracking-tight">
-              {String(seg.value).padStart(2, "0")}
-            </span>
-            <p className="text-xs md:text-sm text-muted-foreground mt-1">{seg.label}</p>
+    <div>
+      <div className="flex items-center justify-center gap-3 md:gap-5">
+        {segments.map((seg, i) => (
+          <div key={seg.label} className="flex items-center gap-3 md:gap-5">
+            <div className="text-center min-w-[64px] md:min-w-[80px]">
+              <span className="text-5xl md:text-7xl font-mono font-bold tabular-nums text-foreground tracking-tight">
+                {String(seg.value).padStart(2, "0")}
+              </span>
+              <p className="text-xs md:text-sm text-muted-foreground mt-1">{seg.label}</p>
+            </div>
+            {i < segments.length - 1 && (
+              <span className="text-3xl md:text-5xl text-muted-foreground/30 font-light">:</span>
+            )}
           </div>
-          {i < segments.length - 1 && (
-            <span className="text-3xl md:text-5xl text-muted-foreground/30 font-light">:</span>
-          )}
-        </div>
-      ))}
+        ))}
+      </div>
+      <p className="text-center text-xs text-primary/60 mt-3 font-medium">目标 400 分</p>
     </div>
   );
 }

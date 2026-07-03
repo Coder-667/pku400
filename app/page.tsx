@@ -2,7 +2,10 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CountdownTimer } from "@/components/CountdownTimer";
-import { BookOpen, Languages, Binary, Cpu } from "lucide-react";
+import { BookOpen, Languages, Binary, Cpu, TrendingUp } from "lucide-react";
+import { target400 } from "@/lib/admission-data";
+
+const scoreMap = Object.fromEntries(target400.map((t) => [t.subject, t.targetScore]));
 
 const subjects = [
   {
@@ -12,7 +15,8 @@ const subjects = [
     color: "text-red-600",
     bgColor: "bg-red-50 dark:bg-red-950",
     borderColor: "border-red-200 dark:border-red-800",
-    score: "100分",
+    targetScore: scoreMap["政治"],
+    fullScore: "100分",
     phases: [
       { label: "7月", text: "徐涛强化课 + 核心考案 + 肖1000" },
       { label: "9月", text: "腿姐技巧班，二刷肖1000" },
@@ -20,7 +24,7 @@ const subjects = [
       { label: "11月", text: "肖八选择题2-3遍，大题看看" },
       { label: "12月", text: "肖四大题背诵 + 时政总结" },
     ],
-    principle: "前松后紧，选择题是重中之重",
+    principle: "选择题38+是底线，北京主观题压分严重",
   },
   {
     id: "english",
@@ -29,7 +33,8 @@ const subjects = [
     color: "text-blue-600",
     bgColor: "bg-blue-50 dark:bg-blue-950",
     borderColor: "border-blue-200 dark:border-blue-800",
-    score: "100分",
+    targetScore: scoreMap["英语一"],
+    fullScore: "100分",
     phases: [
       { label: "每日", text: "单词 + 长难句（颉斌斌66句）" },
       { label: "6月", text: "阅读唐迟，2-3天/篇（05-13年）" },
@@ -38,7 +43,7 @@ const subjects = [
       { label: "9-10月", text: "小三门技巧 + 真题套卷模拟" },
       { label: "11-12月", text: "23-26年真题全真模拟 + 复盘" },
     ],
-    principle: "做题时时刻反思错因，保持饥饿",
+    principle: "阅读错4题以内是75分的关键，作文不能只背模板",
   },
   {
     id: "math",
@@ -47,7 +52,8 @@ const subjects = [
     color: "text-emerald-600",
     bgColor: "bg-emerald-50 dark:bg-emerald-950",
     borderColor: "border-emerald-200 dark:border-emerald-800",
-    score: "150分",
+    targetScore: scoreMap["数学一"],
+    fullScore: "150分",
     link: "/math",
     phases: [
       { label: "3-6月", text: "基础期：高数（张宇/武忠祥）+ 线代（李永乐）+ 概率论（余丙森）" },
@@ -55,7 +61,7 @@ const subjects = [
       { label: "10-11月", text: "真题阶段：两天一套 + 错题复盘" },
       { label: "12月", text: "模拟考试：24-26真题 + 押题卷" },
     ],
-    principle: "错题每隔3-4天必须重做，直到做对为止",
+    principle: "130分 = 选填50+ + 解答56+，错题每隔3-4天必须重做",
   },
   {
     id: "408",
@@ -64,15 +70,16 @@ const subjects = [
     color: "text-purple-600",
     bgColor: "bg-purple-50 dark:bg-purple-950",
     borderColor: "border-purple-200 dark:border-purple-800",
-    score: "150分",
+    targetScore: scoreMap["408计算机综合"],
+    fullScore: "150分",
     link: "/408",
     phases: [
-      { label: "数据结构", text: "45分：线性表、树、图、查找、排序" },
-      { label: "组成原理", text: "45分：数据表示、CPU、存储层次、I/O" },
-      { label: "操作系统", text: "35分：进程、内存管理、文件系统、I/O" },
-      { label: "计算机网络", text: "25分：TCP/IP协议栈、应用层协议" },
+      { label: "数据结构", text: "45分 → 目标36分：线性表、树、图、查找、排序" },
+      { label: "组成原理", text: "45分 → 目标35分：数据表示、CPU、存储层次、I/O" },
+      { label: "操作系统", text: "35分 → 目标28分：进程、内存管理、文件系统、I/O" },
+      { label: "计算机网络", text: "25分 → 目标20分：TCP/IP协议栈、应用层协议" },
     ],
-    principle: "4门科目各占约25%，需全面覆盖 · 王道4件套为核心",
+    principle: "选择题60+ + 大题65+ = 125分，王道4件套为核心",
   },
 ];
 
@@ -80,7 +87,7 @@ export default function MainHomePage() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       {/* Countdown Hero */}
-      <div className="text-center mb-12">
+      <div className="text-center mb-8">
         <p className="text-sm text-muted-foreground mb-4">
           距2026年全国硕士研究生招生考试初试
         </p>
@@ -90,9 +97,38 @@ export default function MainHomePage() {
         </p>
       </div>
 
-      {/* Bold prompt */}
+      {/* Target Score Bar */}
+      <div className="flex items-center justify-center gap-2 md:gap-4 mb-10 flex-wrap">
+        {target400.map((t, i) => (
+          <span key={t.subject} className="flex items-center gap-1">
+            <span className="text-sm font-medium text-muted-foreground">{t.subject}</span>
+            <Badge className="bg-primary/10 text-primary font-bold text-sm px-2.5 py-1">
+              {t.targetScore}
+            </Badge>
+            {i < target400.length - 1 && (
+              <span className="text-muted-foreground/40 text-lg font-light">+</span>
+            )}
+          </span>
+        ))}
+        <span className="text-muted-foreground/40 text-lg font-light">=</span>
+        <Badge className="bg-red-100 text-red-700 font-bold text-base px-3 py-1">400</Badge>
+      </div>
+
+      {/* Score-driven prompt */}
       <div className="text-center mb-10">
-        <p className="text-xl font-bold text-foreground">今天你听歌了吗？</p>
+        <p className="text-lg font-bold text-foreground">
+          目标<span className="text-primary">400</span>分 — 不是口号，是每天每科都要算的账
+        </p>
+        <p className="text-sm text-muted-foreground mt-1">
+          2024考研录取均分397，中位数396。400分是稳妥上岸的底线。
+        </p>
+        <Link
+          href="/scores"
+          className="inline-flex items-center gap-1 text-xs text-primary hover:underline mt-2"
+        >
+          <TrendingUp className="h-3 w-3" />
+          查看完整分数线与目标拆解
+        </Link>
       </div>
 
       {/* Four Subject Cards */}
@@ -109,8 +145,16 @@ export default function MainHomePage() {
                     {subject.title}
                   </h3>
                   <Badge variant="outline" className="ml-auto text-xs">
-                    {subject.score}
+                    {subject.fullScore}
                   </Badge>
+                </div>
+                {/* Target score callout */}
+                <div className="mb-3 text-center py-2 rounded-lg bg-background/50 border border-foreground/5">
+                  <span className="text-xs text-muted-foreground">目标 </span>
+                  <span className={`text-xl font-bold ${subject.color}`}>
+                    {subject.targetScore}
+                  </span>
+                  <span className="text-xs text-muted-foreground"> 分</span>
                 </div>
                 <ul className="space-y-2">
                   {subject.phases.map((phase) => (
@@ -146,10 +190,20 @@ export default function MainHomePage() {
       {/* 180-Day Study Plan */}
       <Card className="mt-10 border-border">
         <CardContent className="p-6 md:p-8">
-          <h2 className="text-2xl font-bold mb-2">180天总规划：应该怎么切</h2>
-          <p className="text-muted-foreground mb-8">
-            你现在最需要的不是宏大口号，而是明确每个阶段打什么仗。
+          <h2 className="text-2xl font-bold mb-2">180天总规划：以400分为目标倒推</h2>
+          <p className="text-muted-foreground mb-4">
+            先定分数目标，再倒推每个阶段必须完成什么。而不是学了再说。
           </p>
+          <div className="p-4 rounded-lg bg-primary/5 border border-primary/10 mb-8">
+            <p className="text-sm">
+              <strong className="text-primary">倒推逻辑：</strong>
+              数学一130（丢20分）→ 高数72/82 + 线代29/34 + 概率29/34。
+              408综合125（丢25分）→ DS 36/45 + CO 35/45 + OS 28/35 + CN 20/25。
+              英语一75 → 阅读32+作文22+其他21。<br />
+              政治70 → 选择38+分析32。
+              这180天的每一分钟，都在为上面这些数字服务。
+            </p>
+          </div>
 
           {[
             {
@@ -197,11 +251,11 @@ export default function MainHomePage() {
             },
             {
               phase: "第四阶段：第 131~160 天",
-              goal: "套卷化、考试化",
+              goal: "套卷化、考试化，目标分数模拟验证",
               items: [
                 { subject: "全线", points: ["数学真题二刷/模拟", "408 真题复盘与整合", "英语一套卷节奏", "政治主观题框架建立"] },
               ],
-              note: "这一阶段要从「我会不会」切换成：「我在规定时间内能拿多少分」",
+              note: "这一阶段要用模考分数验证：数学一是否稳定130+？408是否稳定125+？差距就是下一步的方向。",
             },
             {
               phase: "第五阶段：第 161~180 天",
@@ -240,34 +294,35 @@ export default function MainHomePage() {
           <h2 className="text-2xl font-bold mb-4">前期时间分配（每天 10h+，前 2 个月）</h2>
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6">
             {[
-              { label: "数学一", hours: "4~4.5h", color: "text-emerald-600 bg-emerald-50 dark:bg-emerald-950" },
-              { label: "408", hours: "3~3.5h", color: "text-purple-600 bg-purple-50 dark:bg-purple-950" },
-              { label: "英语一", hours: "1.5~2h", color: "text-blue-600 bg-blue-50 dark:bg-blue-950" },
-              { label: "政治", hours: "0.5h", color: "text-red-600 bg-red-50 dark:bg-red-950" },
-              { label: "复盘/总结", hours: "0.5h", color: "text-amber-600 bg-amber-50 dark:bg-amber-950" },
+              { label: "数学一", hours: "4~4.5h", target: "目标130", color: "text-emerald-600 bg-emerald-50 dark:bg-emerald-950" },
+              { label: "408", hours: "3~3.5h", target: "目标125", color: "text-purple-600 bg-purple-50 dark:bg-purple-950" },
+              { label: "英语一", hours: "1.5~2h", target: "目标75", color: "text-blue-600 bg-blue-50 dark:bg-blue-950" },
+              { label: "政治", hours: "0.5h", target: "目标70", color: "text-red-600 bg-red-50 dark:bg-red-950" },
+              { label: "复盘/总结", hours: "0.5h", target: "默写公式", color: "text-amber-600 bg-amber-50 dark:bg-amber-950" },
             ].map((t) => (
               <div key={t.label} className={`rounded-lg p-3 text-center ${t.color}`}>
                 <p className="text-xs opacity-70">{t.label}</p>
                 <p className="text-lg font-bold">{t.hours}</p>
+                <p className="text-xs opacity-60 mt-0.5">{t.target}</p>
               </div>
             ))}
           </div>
           <div className="space-y-2 text-sm text-muted-foreground">
-            <p><strong className="text-foreground">数学一必须压倒性优先</strong> — 因为它最难、最慢、最吃连续性。</p>
-            <p><strong className="text-foreground">408 必须尽早展开</strong> — 因为它不是后期能轻松补回来的。</p>
-            <p><strong className="text-foreground">英语一不能放，但不需要抢太多时间</strong> — 你已经有基础，当前主要是适配和维持。</p>
-            <p><strong className="text-foreground">政治先保持存在感</strong> — 别消失，但也别前期喧宾夺主。</p>
+            <p><strong className="text-foreground">数学一必须压倒性优先</strong> — 150分卷面，130分目标，丢分空间只有20分。是最难、最慢、最吃连续性的科目。</p>
+            <p><strong className="text-foreground">408 必须尽早展开</strong> — 四门课125分，每门都要吃透。不能后期突击。</p>
+            <p><strong className="text-foreground">英语一不能放，但不需要抢太多时间</strong> — 目标75分，阅读错4题内即可达标，重点在维持和精练。</p>
+            <p><strong className="text-foreground">政治先保持存在感</strong> — 目标70分，选择38+即可。前期喧宾夺主会挤占数学和408的时间。</p>
           </div>
 
           <hr className="my-8" />
 
-          <h2 className="text-2xl font-bold mb-4">你接下来最该担心的不是来不来得及，而是这 4 件事</h2>
+          <h2 className="text-2xl font-bold mb-4">你接下来最该担心的不是来不来得及，而是这4件事</h2>
           <div className="space-y-4">
             {[
-              { num: "1", title: "数学一启动质量", body: "如果你前 30 天数学只是「看懂」，那后面会很难。你要做到：听课/看书后能独立做题、能复盘为什么错、能归纳题型。" },
-              { num: "2", title: "408 的节奏是否持续", body: "408 最怕：今天学数据结构，明天停三天，计组一听就忘，操作系统拖到后面，计网只看不练。它必须持续滚动。" },
-              { num: "3", title: "英语一有没有按英一标准练", body: "不要被去年英二 78 麻痹。你要尽快拿英一真题验证自己。" },
-              { num: "4", title: "是否过早追求完美", body: "你现在不是要把每一章学成满分讲师，而是要在有限时间内建立：可用基础、可持续做题能力、可转化成分数的体系。" },
+              { num: "1", title: "数学一能否稳定在130+", body: "如果你前30天数学只是「看懂」，后面很难到130。你需要做到：独立做题、复盘错因、归纳题型。130分意味着你最多错2道选择题+1道大题半错。" },
+              { num: "2", title: "408 四门是不是在持续滚动", body: "408最怕断节奏。今天学DS，明天停三天，CO一听就忘，OS拖到后面，CN只看不练。125分要求选择题60+，大题65+。" },
+              { num: "3", title: "英语一有没有按英一标准练到75", body: "不要被英二78麻痹。英一75 = 阅读32(错4题) + 作文22 + 完型6 + 新题型8 + 翻译7。拿真题验证。" },
+              { num: "4", title: "是否过早追求完美", body: "你不是要把每一章学成满分讲师，而是要在有限时间内建立：可用基础、可持续做题能力、可转化成分数的体系。400分是目标，不是每科都要满分。" },
             ].map((item) => (
               <div key={item.num} className="flex gap-3">
                 <span className="shrink-0 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">{item.num}</span>
