@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, FileText, Target, Layers, ArrowRight, ExternalLink, PenLine } from "lucide-react";
+import { FileText, Target, Layers, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { target408SubSubjects } from "@/lib/admission-data";
@@ -201,58 +201,8 @@ export default function Home408Page() {
         </div>
       </div>
 
-      {/* Real Exam Practice */}
-      <div className="mb-10">
-        <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-          <PenLine className="h-5 w-5 text-primary" /> 历年真题刷题
-        </h2>
-        <div className="grid md:grid-cols-2 gap-4">
-          <Link href="/408/exam">
-            <Card className="hover:shadow-md transition-shadow cursor-pointer h-full border-primary/30 bg-primary/5">
-              <CardContent className="p-5">
-                <h3 className="font-semibold text-lg mb-1">
-                  在线刷真题（2009-2026）
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  选择题交互式作答，即时判对错 + 详细解析，进度自动保存
-                </p>
-              </CardContent>
-            </Card>
-          </Link>
-          <Card className="bg-muted/30">
-            <CardContent className="p-5 space-y-2">
-              <h3 className="font-semibold text-sm">外部真题平台</h3>
-              <div className="space-y-1">
-                {[
-                  { name: "王道计算机考研", note: "微信小程序 · 18年真题", url: "#" },
-                  { name: "橙啦计算机考研", note: "微信小程序 · AI批改", url: "#" },
-                  { name: "竹一道来408", note: "微信小程序 · 免费+AI答疑", url: "#" },
-                  { name: "码虫刷题", note: "App · 真题+模拟+择校", url: "#" },
-                ].map((p) => (
-                  <div key={p.name} className="flex items-center justify-between text-xs">
-                    <span className="font-medium">{p.name}</span>
-                    <span className="text-muted-foreground">{p.note}</span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-
       {/* Quick Links */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Link href="/books">
-          <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
-            <CardContent className="p-6 flex flex-col items-center text-center gap-3">
-              <BookOpen className="h-8 w-8 text-primary" />
-              <div>
-                <h3 className="font-semibold">浏览书目</h3>
-                <p className="text-sm text-muted-foreground">王道4件套 + 参考教材</p>
-              </div>
-            </CardContent>
-          </Card>
-        </Link>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <Link href="/admin/ai-generate">
           <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
             <CardContent className="p-6 flex flex-col items-center text-center gap-3">

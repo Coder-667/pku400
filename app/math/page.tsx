@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, FileText, Target } from "lucide-react";
+import { FileText, Target } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { targetMathModules } from "@/lib/admission-data";
@@ -144,18 +144,7 @@ export default function MathPage() {
       </div>
 
       {/* Quick Links */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Link href="/books">
-          <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
-            <CardContent className="p-6 flex flex-col items-center text-center gap-3">
-              <BookOpen className="h-8 w-8 text-primary" />
-              <div>
-                <h3 className="font-semibold">浏览书目</h3>
-                <p className="text-sm text-muted-foreground">教材 + 习题集</p>
-              </div>
-            </CardContent>
-          </Card>
-        </Link>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4">
         <Link href="/scores">
           <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
             <CardContent className="p-6 flex flex-col items-center text-center gap-3">
