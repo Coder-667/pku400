@@ -181,8 +181,8 @@ export default function MainHomePage() {
 
       {/* Score-driven prompt */}
       <div className="text-center mb-10">
-        <p className="text-lg font-bold text-foreground">
-          目标<span className="text-primary">400</span>分 — 不是口号，是每天每科都要算的账
+        <p className="text-xl font-bold tracking-widest" style={{ color: "#9B1B30", fontFamily: "'STKaiti', 'KaiTi', 'Noto Serif SC', serif" }}>
+          不要把梦想埋没
         </p>
         <p className="text-sm text-muted-foreground mt-1">
           2024考研录取均分397，中位数396。400分是稳妥上岸的底线。
