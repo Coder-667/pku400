@@ -276,7 +276,7 @@ export default function ScoresPage() {
               </p>
               <p className="text-sm font-mono bg-muted p-3 rounded-lg">{retestInfo.formula}</p>
               <p className="text-xs text-muted-foreground mt-2">
-                复录比：{retestInfo.ratio}。2024年198人进复试，约240-300人参加复试。
+                复录比：{retestInfo.ratio}。2026年01-04方向401人进复试，录取196人。
               </p>
             </div>
             <div>
