@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CountdownTimer } from "@/components/CountdownTimer";
-import { BookOpen, Languages, Binary, Cpu, TrendingUp } from "lucide-react";
+import { BookOpen, Languages, Binary, Cpu, TrendingUp, Calendar, ExternalLink, Bell, CreditCard, MapPin, UserCheck } from "lucide-react";
 import { target400 } from "@/lib/admission-data";
 
 const scoreMap = Object.fromEntries(target400.map((t) => [t.subject, t.targetScore]));
@@ -96,6 +96,71 @@ export default function MainHomePage() {
           2026年12月19日 上午8:30
         </p>
       </div>
+
+      {/* 考研大事记 */}
+      <Card className="mb-8 border-border max-w-2xl mx-auto">
+        <CardContent className="p-4 md:p-5">
+          <h3 className="text-sm font-bold mb-3 flex items-center gap-2">
+            <Calendar className="h-4 w-4 text-primary" />
+            考研大事记
+            <span className="text-xs text-muted-foreground font-normal">— 2026年</span>
+          </h3>
+          <div className="grid sm:grid-cols-2 gap-x-6 gap-y-1.5 text-sm">
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground w-14 shrink-0">9月中旬</span>
+              <span>招生简章/目录发布</span>
+              <a
+                href="https://www.ss.pku.edu.cn"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-primary hover:underline inline-flex items-center gap-0.5"
+              >
+                官网<ExternalLink className="h-2.5 w-2.5" />
+              </a>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground w-14 shrink-0">9月下旬</span>
+              <span>预报名</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground w-14 shrink-0">10月中</span>
+              <span>正式报名 + 缴费</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground w-14 shrink-0">11月初</span>
+              <span className="inline-flex items-center gap-1">
+                <UserCheck className="h-3 w-3" /> 网上确认
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground w-14 shrink-0">11月中</span>
+              <span className="text-amber-600 font-medium">肖八上市</span>
+              <span className="text-xs text-muted-foreground">（淘宝/京东提前加购）</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground w-14 shrink-0">12月初</span>
+              <span className="text-red-600 font-medium">肖四上市</span>
+              <span className="text-xs text-muted-foreground">（第一时间买，马上背）</span>
+            </div>
+          </div>
+
+          {/* 报名信息速查 */}
+          <div className="mt-3 pt-3 border-t border-border grid sm:grid-cols-3 gap-x-6 gap-y-1 text-xs text-muted-foreground">
+            <div className="flex items-center gap-1.5">
+              <Bell className="h-3 w-3 shrink-0" />
+              <span>报考单位：北京大学（10001）</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <CreditCard className="h-3 w-3 shrink-0" />
+              <span>专业代码：085400 电子信息</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <MapPin className="h-3 w-3 shrink-0" />
+              <span>考点：户籍所在地</span>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Target Score Bar */}
       <div className="flex items-center justify-center gap-2 md:gap-4 mb-10 flex-wrap">
