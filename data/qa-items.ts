@@ -1550,6 +1550,13 @@ export function getWeakPoints(): QAItem[] {
     .sort((a, b) => b.date.localeCompare(a.date));
 }
 
+/** Get weak point items filtered by subject */
+export function getWeakPointsBySubject(subject: QASubject): QAItem[] {
+  return qaItems
+    .filter((q) => q.subject === subject && q.isWeakPoint)
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
+
 /** Group Q&A items by subject for display */
 export function getQAGroupedBySubject(): Record<QASubject, QAItem[]> {
   const result: Record<string, QAItem[]> = {};
