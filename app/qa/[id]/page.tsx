@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ChevronRight, ArrowLeft } from "lucide-react";
+import { ChevronRight, ArrowLeft, ImageIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 import {
@@ -75,6 +75,26 @@ export default async function QADetailPage({ params }: QADetailPageProps) {
           <MarkdownRenderer content={item.question} />
         </div>
       </div>
+
+      {/* Original Screenshots */}
+      {item.images && item.images.length > 0 && (
+        <div className="mb-6 p-5 rounded-lg border bg-muted/30">
+          <h2 className="text-sm font-semibold text-muted-foreground mb-3 flex items-center gap-2">
+            <ImageIcon className="h-4 w-4" />
+            题目截图
+          </h2>
+          <div className="space-y-3">
+            {item.images.map((img, i) => (
+              <img
+                key={img}
+                src={img}
+                alt={`题目截图 ${i + 1}`}
+                className="w-full rounded-lg border"
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Answer */}
       <div className="mb-8 p-5 rounded-lg border bg-green-50/50 dark:bg-green-950/20">
