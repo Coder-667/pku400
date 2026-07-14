@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, Dumbbell, FileText, Target, Layers, ArrowRight, ExternalLink, PenLine } from "lucide-react";
+import { BookOpen, FileText, Target, Layers, ArrowRight, ExternalLink, PenLine } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { target408SubSubjects } from "@/lib/admission-data";
@@ -249,17 +249,6 @@ export default function Home408Page() {
               <div>
                 <h3 className="font-semibold">浏览书目</h3>
                 <p className="text-sm text-muted-foreground">王道4件套 + 参考教材</p>
-              </div>
-            </CardContent>
-          </Card>
-        </Link>
-        <Link href="/exercises">
-          <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
-            <CardContent className="p-6 flex flex-col items-center text-center gap-3">
-              <Dumbbell className="h-8 w-8 text-primary" />
-              <div>
-                <h3 className="font-semibold">刷题练习</h3>
-                <p className="text-sm text-muted-foreground">历年真题 + AI生成题</p>
               </div>
             </CardContent>
           </Card>

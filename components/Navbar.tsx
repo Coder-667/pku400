@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, Dumbbell, Home, Settings, Wrench, Cpu, Sigma, TrendingUp, FileText, MessageSquare } from "lucide-react";
+import { BookOpen, Home, Settings, Wrench, Cpu, Sigma, TrendingUp, FileText, MessageSquare } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -12,7 +12,8 @@ const navItems = [
   { href: "/math", label: "数学一", icon: Sigma },
   { href: "/scores", label: "分数线", icon: TrendingUp },
   { href: "/books", label: "书目", icon: BookOpen },
-  { href: "/exercises", label: "习题", icon: Dumbbell },
+
+
   { href: "/qa", label: "问答", icon: MessageSquare },
   { href: "/admin", label: "管理", icon: Settings },
   { href: "/tools", label: "工具", icon: Wrench },
