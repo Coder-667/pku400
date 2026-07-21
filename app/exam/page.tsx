@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { FileQuestion, Cpu, Sigma, Languages, BookOpen, CheckCircle2, AlertCircle } from "lucide-react";
+import { FileQuestion, Cpu, Sigma, Languages, BookOpen, CheckCircle2, Code } from "lucide-react";
 
 const cs408 = {
   name: "408 计算机学科专业基础综合",
@@ -120,11 +120,70 @@ export default function ExamStructurePage() {
               ))}
             </div>
             <div className="mt-4 flex items-start gap-2 text-xs text-muted-foreground">
-              <AlertCircle className="h-3.5 w-3.5 shrink-0 mt-0.5" />
+              <CheckCircle2 className="h-3.5 w-3.5 shrink-0 mt-0.5" />
               <p>
-                408 没有判断题或独立代码题；算法设计通常以综合应用题形式出现（如 DS 第 42 题）。
+                408 由 40 道单选题和 7 道综合应用题组成。算法设计通常以综合应用题形式出现（如 DS 第 41、42 题），
                 大题分值每年可能略有调整，总体结构稳定。
               </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 408 Code/Algorithm Question Guide */}
+        <Card className="mt-6 border-l-4 border-l-purple-500 bg-purple-50/30 dark:bg-purple-950/20">
+          <CardContent className="p-5">
+            <div className="flex items-center gap-2 mb-4">
+              <Code className="h-5 w-5 text-purple-600" />
+              <h3 className="text-lg font-bold">408 算法设计题（“代码题”）怎么考</h3>
+            </div>
+
+            <div className="space-y-4 text-sm">
+              <div className="rounded-lg bg-background p-4 border">
+                <p className="font-semibold mb-2">考察形式</p>
+                <p className="text-muted-foreground leading-relaxed">
+                  不是独立的编程考试，而是数据结构综合应用题中的一部分。真题通常会要求：
+                  <strong>① 算法设计思想</strong>（文字说明）、
+                  <strong>② 数据类型定义</strong>（如链表/树结点的 C 结构体）、
+                  <strong>③ C/C++ 或伪代码实现</strong>、
+                  <strong>④ 时间/空间复杂度分析</strong>。
+                  写伪代码是允许的，不必写完整可编译程序。
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-3 gap-3">
+                <div className="rounded-lg bg-background p-3 border">
+                  <p className="font-semibold text-purple-700 mb-1">基础阶段</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    重点理解数据结构实现：链表插入删除、二叉树遍历、基本排序等。
+                    能做到“看懂 + 能手写基础版”即可，不必大量刷算法大题。
+                  </p>
+                </div>
+                <div className="rounded-lg bg-background p-3 border">
+                  <p className="font-semibold text-purple-700 mb-1">强化阶段</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    每天或隔天做 1 道真题风格算法题。重点突破链表双指针、二叉树递归、图的 DFS/BFS。
+                    这是代码题提分最快的时期。
+                  </p>
+                </div>
+                <div className="rounded-lg bg-background p-3 border">
+                  <p className="font-semibold text-purple-700 mb-1">冲刺阶段</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    反复默写高频模板，二刷真题算法题。考场策略：先写暴力解保底，再尝试最优解；
+                    边界条件（空表、空树）一定要处理。
+                  </p>
+                </div>
+              </div>
+
+              <div className="rounded-lg bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 p-3">
+                <p className="font-semibold text-xs text-amber-900 dark:text-amber-200 mb-1">
+                  关于“学完一章单独抽一天练代码题”
+                </p>
+                <p className="text-xs text-amber-800 dark:text-amber-300 leading-relaxed">
+                  集中突破是一种方式，但不建议完全与章节学习割裂。
+                  更推荐<strong>每章学完后用 1—2 道代码题收尾</strong>，既巩固本章结构，又提前熟悉大题风格；
+                  强化阶段再安排整块时间系统突破真题算法题。
+                </p>
+              </div>
             </div>
           </CardContent>
         </Card>
