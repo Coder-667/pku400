@@ -1,4 +1,4 @@
-import { TrendingUp, Target, AlertTriangle, Shield, ArrowUpRight } from "lucide-react";
+import { TrendingUp, Target, AlertTriangle, Shield, ArrowUpRight, BookOpen, Mic, Code, FileText, Users, CheckCircle2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -55,11 +55,11 @@ export default function ScoresPage() {
             </tr>
           </thead>
           <tbody>
-            {admissionHistory.map((r, i) => (
+            {[...admissionHistory].reverse().map((r, i) => (
               <tr
                 key={r.year}
                 className={`border-t hover:bg-muted/30 transition-colors ${
-                  i === admissionHistory.length - 1 ? "bg-primary/5 font-medium" : ""
+                  r.year === "2026" ? "bg-primary/5 font-medium" : ""
                 }`}
               >
                 <td className="p-3">{r.year}考研</td>
@@ -266,7 +266,8 @@ export default function ScoresPage() {
       <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
         <AlertTriangle className="h-5 w-5 text-amber-500" /> 复试：不能忽视的40%
       </h2>
-      <Card className="border-l-4 border-l-amber-500">
+
+      <Card className="mb-6 border-l-4 border-l-amber-500">
         <CardContent className="p-6">
           <div className="grid md:grid-cols-2 gap-6">
             <div>
@@ -284,6 +285,109 @@ export default function ScoresPage() {
               <p className="text-sm text-muted-foreground">{retestInfo.description}</p>
               <p className="text-xs text-red-600 dark:text-red-400 mt-2 font-medium">{retestInfo.note}</p>
             </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <div className="grid md:grid-cols-2 gap-4 mb-6">
+        <Card>
+          <CardContent className="p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <Users className="h-4 w-4 text-primary" />
+              <h3 className="font-bold text-sm">复试流程</h3>
+            </div>
+            <ol className="text-sm text-muted-foreground space-y-1.5 list-decimal list-inside">
+              <li>资格审查：登记表、个人陈述、成绩单、学历证明等</li>
+              <li>复试缴费（约 100 元/人次）</li>
+              <li>机试/笔试：数据结构与算法、编程能力、专业基础</li>
+              <li>综合面试：专业知识、项目经历、逻辑思维、综合素质</li>
+              <li>英语测试：自我介绍、日常问答、专业概念英文解释</li>
+            </ol>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <BookOpen className="h-4 w-4 text-primary" />
+              <h3 className="font-bold text-sm">408 方向复试考察重点</h3>
+            </div>
+            <ul className="text-sm text-muted-foreground space-y-1.5">
+              <li className="flex items-start gap-1.5">
+                <span className="shrink-0 mt-1 w-1 h-1 rounded-full bg-primary/60" />
+                408 专业课：注重知识体系理解与跨课程联系
+              </li>
+              <li className="flex items-start gap-1.5">
+                <span className="shrink-0 mt-1 w-1 h-1 rounded-full bg-primary/60" />
+                编程/机试：LeetCode Easy→Medium，重点链表、树、图、排序
+              </li>
+              <li className="flex items-start gap-1.5">
+                <span className="shrink-0 mt-1 w-1 h-1 rounded-full bg-primary/60" />
+                英语口语：自我介绍 + 日常问答 + 专业术语英文表达
+              </li>
+              <li className="flex items-start gap-1.5">
+                <span className="shrink-0 mt-1 w-1 h-1 rounded-full bg-primary/60" />
+                项目/个人陈述：背景、技术栈、个人贡献、问题解决思路
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
+      </div>
+
+      <Card className="border-l-4 border-l-emerald-500 bg-emerald-50/30 dark:bg-emerald-950/20">
+        <CardContent className="p-5">
+          <div className="flex items-center gap-2 mb-4">
+            <CheckCircle2 className="h-5 w-5 text-emerald-600" />
+            <h3 className="font-bold">初试期间可以顺带做的复试准备</h3>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="rounded-lg bg-background p-4 border">
+              <div className="flex items-center gap-2 mb-2">
+                <Code className="h-4 w-4 text-emerald-600" />
+                <p className="font-semibold text-sm">算法能力</p>
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                复习 408 数据结构时，每天顺手写 1 道代码题；后期刷 LeetCode，既是初试也是机试准备。
+              </p>
+            </div>
+
+            <div className="rounded-lg bg-background p-4 border">
+              <div className="flex items-center gap-2 mb-2">
+                <Mic className="h-4 w-4 text-emerald-600" />
+                <p className="font-semibold text-sm">英语口语</p>
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                背单词和读长难句时，顺便朗读专业术语英文表达；准备 3 分钟英文自我介绍。
+              </p>
+            </div>
+
+            <div className="rounded-lg bg-background p-4 border">
+              <div className="flex items-center gap-2 mb-2">
+                <FileText className="h-4 w-4 text-emerald-600" />
+                <p className="font-semibold text-sm">项目梳理</p>
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                整理本科项目/课程设计/竞赛：背景、技术栈、个人贡献、遇到的问题与解决方案。
+              </p>
+            </div>
+
+            <div className="rounded-lg bg-background p-4 border">
+              <div className="flex items-center gap-2 mb-2">
+                <BookOpen className="h-4 w-4 text-emerald-600" />
+                <p className="font-semibold text-sm">专业英语</p>
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                学 408 时给每个核心概念记一个英文说法，面试可能被要求用英文解释数据结构/算法。
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-4 text-xs text-muted-foreground">
+            <p>
+              提示：北大软微复试权重高，曾有 410+ 高分考生因复试不及格被刷。初试备考不要把复试完全推到最后，
+              尤其是算法和英语口语需要长期积累。
+            </p>
           </div>
         </CardContent>
       </Card>
