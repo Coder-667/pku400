@@ -55,7 +55,10 @@ export default function ScoresPage() {
             </tr>
           </thead>
           <tbody>
-            {[...admissionHistory].reverse().map((r, i) => (
+            {[...admissionHistory]
+              .filter((r) => parseInt(r.year) >= 2024)
+              .reverse()
+              .map((r, i) => (
               <tr
                 key={r.year}
                 className={`border-t hover:bg-muted/30 transition-colors ${
