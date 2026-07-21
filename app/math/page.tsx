@@ -177,20 +177,7 @@ export default function MathPage() {
             <h2 className="text-lg font-bold">经验贴与路径参考</h2>
           </div>
 
-          <div className="space-y-4 mb-5">
-            {studyPaths.map((path) => (
-              <div key={path.name} className="rounded-lg bg-muted/50 p-4">
-                <p className="font-semibold text-sm mb-1">{path.name}</p>
-                <p className="text-sm text-muted-foreground mb-2">{path.summary}</p>
-                <div className="flex flex-wrap gap-2 text-xs">
-                  <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">优点：{path.pros}</span>
-                  <span className="text-amber-700 bg-amber-50 px-2 py-0.5 rounded">缺点：{path.cons}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="rounded-lg bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 p-4">
+          <div className="rounded-lg bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 p-4 mb-5">
             <div className="flex items-start gap-2">
               <Lightbulb className="h-4 w-4 text-amber-600 mt-0.5 shrink-0" />
               <div>
@@ -202,6 +189,19 @@ export default function MathPage() {
                 </p>
               </div>
             </div>
+          </div>
+
+          <div className="space-y-4 mb-5">
+            {studyPaths.map((path) => (
+              <div key={path.name} className="rounded-lg bg-muted/50 p-4">
+                <p className="font-semibold text-sm mb-1">{path.name}</p>
+                <p className="text-sm text-muted-foreground mb-2">{path.summary}</p>
+                <div className="flex flex-wrap gap-2 text-xs">
+                  <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">优点：{path.pros}</span>
+                  <span className="text-amber-700 bg-amber-50 px-2 py-0.5 rounded">缺点：{path.cons}</span>
+                </div>
+              </div>
+            ))}
           </div>
 
           <div className="mt-4 flex items-start gap-2 text-xs text-muted-foreground">
