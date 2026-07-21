@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { FileQuestion, Cpu, Sigma, Languages, BookOpen, CheckCircle2, Code } from "lucide-react";
+import { ScrollText, Cpu, Sigma, Languages, BookOpen, CheckCircle2, Code } from "lucide-react";
 
 const cs408 = {
   name: "408 计算机学科专业基础综合",
@@ -65,7 +65,7 @@ export default function ExamStructurePage() {
       {/* Hero */}
       <div className="text-center mb-10">
         <h1 className="text-4xl font-bold tracking-tight mb-4 flex items-center justify-center gap-3">
-          <FileQuestion className="h-8 w-8 text-primary" />
+          <ScrollText className="h-8 w-8 text-primary" />
           真题结构
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
