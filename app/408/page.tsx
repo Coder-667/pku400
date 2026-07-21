@@ -1,5 +1,7 @@
-import Link from "next/link";
-import { FileText, Target, Layers, ArrowRight } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { FileText, Target, Layers, ArrowRight, ChevronDown } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { target408SubSubjects } from "@/lib/admission-data";
@@ -11,35 +13,54 @@ const subSubjects = [
   { name: "计算机网络", score: "25分", target: 20, weight: "约17%", color: "bg-pink-100 text-pink-800" },
 ];
 
-const dsTopics = [
-  { text: "线性表（顺序表、链表、栈、队列）", freq: "high" },
-  { text: "树与二叉树（遍历、BST、平衡二叉树）", freq: "high" },
-  { text: "图（DFS/BFS、最小生成树、最短路径、拓扑排序、关键路径）", freq: "high" },
-  { text: "查找（顺序、折半、B树/B+树、散列表）", freq: "high" },
-  { text: "排序（插入、交换、选择、归并、基数排序及复杂度分析）", freq: "high" },
-];
-
-const coTopics = [
-  { text: "数据表示与运算（补码、浮点数、ALU）", freq: "high" },
-  { text: "存储器层次结构（Cache、虚存、TLB）", freq: "high" },
-  { text: "指令系统（寻址方式、CISC vs RISC）", freq: "mid" },
-  { text: "CPU数据通路（流水线、数据冒险/控制冒险）", freq: "high" },
-  { text: "总线与I/O（中断、DMA、总线标准）", freq: "mid" },
-];
-
-const osTopics = [
-  { text: "进程管理（进程/线程、同步互斥、死锁）", freq: "high" },
-  { text: "内存管理（分页/分段、虚拟内存、页面置换）", freq: "high" },
-  { text: "文件系统（文件结构、目录、空闲空间管理）", freq: "mid" },
-  { text: "I/O管理（磁盘调度、I/O控制方式、SPOOLing）", freq: "mid" },
-];
-
-const cnTopics = [
-  { text: "物理层（奈奎斯特定理、香农定理、编码）", freq: "low" },
-  { text: "数据链路层（CSMA/CD、MAC帧、交换机）", freq: "mid" },
-  { text: "网络层（IP、子网划分、CIDR、路由协议RIP/OSPF/BGP）", freq: "high" },
-  { text: "传输层（TCP/UDP、流量控制、拥塞控制）", freq: "high" },
-  { text: "应用层（DNS、HTTP/HTTPS、FTP、SMTP）", freq: "mid" },
+const topicGroups = [
+  {
+    subject: "数据结构",
+    color: "text-purple-500",
+    dot: "bg-purple-500",
+    topics: [
+      { text: "线性表（顺序表、链表、栈、队列）", freq: "high" },
+      { text: "树与二叉树（遍历、BST、平衡二叉树）", freq: "high" },
+      { text: "图（DFS/BFS、最小生成树、最短路径、拓扑排序、关键路径）", freq: "high" },
+      { text: "查找（顺序、折半、B树/B+树、散列表）", freq: "high" },
+      { text: "排序（插入、交换、选择、归并、基数排序及复杂度分析）", freq: "high" },
+    ],
+  },
+  {
+    subject: "计算机组成原理",
+    color: "text-orange-500",
+    dot: "bg-orange-500",
+    topics: [
+      { text: "数据表示与运算（补码、浮点数、ALU）", freq: "high" },
+      { text: "存储器层次结构（Cache、虚存、TLB）", freq: "high" },
+      { text: "指令系统（寻址方式、CISC vs RISC）", freq: "mid" },
+      { text: "CPU数据通路（流水线、数据冒险/控制冒险）", freq: "high" },
+      { text: "总线与I/O（中断、DMA、总线标准）", freq: "mid" },
+    ],
+  },
+  {
+    subject: "操作系统",
+    color: "text-cyan-500",
+    dot: "bg-cyan-500",
+    topics: [
+      { text: "进程管理（进程/线程、同步互斥、死锁）", freq: "high" },
+      { text: "内存管理（分页/分段、虚拟内存、页面置换）", freq: "high" },
+      { text: "文件系统（文件结构、目录、空闲空间管理）", freq: "mid" },
+      { text: "I/O管理（磁盘调度、I/O控制方式、SPOOLing）", freq: "mid" },
+    ],
+  },
+  {
+    subject: "计算机网络",
+    color: "text-pink-500",
+    dot: "bg-pink-500",
+    topics: [
+      { text: "物理层（奈奎斯特定理、香农定理、编码）", freq: "low" },
+      { text: "数据链路层（CSMA/CD、MAC帧、交换机）", freq: "mid" },
+      { text: "网络层（IP、子网划分、CIDR、路由协议RIP/OSPF/BGP）", freq: "high" },
+      { text: "传输层（TCP/UDP、流量控制、拥塞控制）", freq: "high" },
+      { text: "应用层（DNS、HTTP/HTTPS、FTP、SMTP）", freq: "mid" },
+    ],
+  },
 ];
 
 const freqBadge: Record<string, { label: string; className: string }> = {
@@ -50,6 +71,7 @@ const freqBadge: Record<string, { label: string; className: string }> = {
 
 export default function Home408Page() {
   const totalTarget = target408SubSubjects.reduce((sum, s) => sum + s.targetScore, 0);
+  const [showTopics, setShowTopics] = useState(false);
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-5xl">
@@ -129,102 +151,43 @@ export default function Home408Page() {
         ))}
       </div>
 
-      {/* Topic Checklists - DS + CO in first row */}
-      <div className="grid md:grid-cols-2 gap-6 mb-10">
-        <div>
-          <h2 className="text-xl font-bold mb-3 flex items-center gap-2">
-            <FileText className="h-5 w-5 text-purple-500" /> 数据结构考点清单
-          </h2>
-          <div className="grid grid-cols-1 gap-1.5">
-            {dsTopics.map((topic) => (
-              <div key={topic.text} className="flex items-center gap-2 text-sm p-2 rounded-md bg-muted/50">
-                <span className="h-1.5 w-1.5 rounded-full bg-purple-500 shrink-0" />
-                {topic.text}
-                <Badge className={`text-[10px] ml-auto ${freqBadge[topic.freq].className}`} variant="outline">
-                  {freqBadge[topic.freq].label}
-                </Badge>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div>
-          <h2 className="text-xl font-bold mb-3 flex items-center gap-2">
-            <FileText className="h-5 w-5 text-orange-500" /> 组成原理考点清单
-          </h2>
-          <div className="grid grid-cols-1 gap-1.5">
-            {coTopics.map((topic) => (
-              <div key={topic.text} className="flex items-center gap-2 text-sm p-2 rounded-md bg-muted/50">
-                <span className="h-1.5 w-1.5 rounded-full bg-orange-500 shrink-0" />
-                {topic.text}
-                <Badge className={`text-[10px] ml-auto ${freqBadge[topic.freq].className}`} variant="outline">
-                  {freqBadge[topic.freq].label}
-                </Badge>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      {/* Collapsible Topic Checklists */}
+      <div className="mb-10">
+        <button
+          type="button"
+          onClick={() => setShowTopics((v) => !v)}
+          className="flex w-full items-center justify-between rounded-lg border bg-card p-4 text-left font-semibold transition-colors hover:bg-accent"
+        >
+          <span className="flex items-center gap-2">
+            <FileText className="h-5 w-5 text-primary" />
+            四科考点清单
+          </span>
+          <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform ${showTopics ? "rotate-180" : ""}`} />
+        </button>
 
-      {/* OS + CN in second row */}
-      <div className="grid md:grid-cols-2 gap-6 mb-10">
-        <div>
-          <h2 className="text-xl font-bold mb-3 flex items-center gap-2">
-            <FileText className="h-5 w-5 text-cyan-500" /> 操作系统考点清单
-          </h2>
-          <div className="grid grid-cols-1 gap-1.5">
-            {osTopics.map((topic) => (
-              <div key={topic.text} className="flex items-center gap-2 text-sm p-2 rounded-md bg-muted/50">
-                <span className="h-1.5 w-1.5 rounded-full bg-cyan-500 shrink-0" />
-                {topic.text}
-                <Badge className={`text-[10px] ml-auto ${freqBadge[topic.freq].className}`} variant="outline">
-                  {freqBadge[topic.freq].label}
-                </Badge>
+        {showTopics && (
+          <div className="grid md:grid-cols-2 gap-6 mt-4">
+            {topicGroups.map((group) => (
+              <div key={group.subject}>
+                <h3 className={`text-lg font-bold mb-3 flex items-center gap-2 ${group.color}`}>
+                  <span className={`h-2 w-2 rounded-full ${group.dot}`} />
+                  {group.subject}
+                </h3>
+                <div className="grid grid-cols-1 gap-1.5">
+                  {group.topics.map((topic) => (
+                    <div key={topic.text} className="flex items-center gap-2 text-sm p-2 rounded-md bg-muted/50">
+                      <span className={`h-1.5 w-1.5 rounded-full ${group.dot} shrink-0`} />
+                      {topic.text}
+                      <Badge className={`text-[10px] ml-auto ${freqBadge[topic.freq].className}`} variant="outline">
+                        {freqBadge[topic.freq].label}
+                      </Badge>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
-        </div>
-        <div>
-          <h2 className="text-xl font-bold mb-3 flex items-center gap-2">
-            <FileText className="h-5 w-5 text-pink-500" /> 计算机网络考点清单
-          </h2>
-          <div className="grid grid-cols-1 gap-1.5">
-            {cnTopics.map((topic) => (
-              <div key={topic.text} className="flex items-center gap-2 text-sm p-2 rounded-md bg-muted/50">
-                <span className="h-1.5 w-1.5 rounded-full bg-pink-500 shrink-0" />
-                {topic.text}
-                <Badge className={`text-[10px] ml-auto ${freqBadge[topic.freq].className}`} variant="outline">
-                  {freqBadge[topic.freq].label}
-                </Badge>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Quick Links */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Link href="/admin/ai-generate">
-          <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
-            <CardContent className="p-6 flex flex-col items-center text-center gap-3">
-              <Target className="h-8 w-8 text-primary" />
-              <div>
-                <h3 className="font-semibold">AI 生成习题</h3>
-                <p className="text-sm text-muted-foreground">输入知识点 · 自动出题</p>
-              </div>
-            </CardContent>
-          </Card>
-        </Link>
-        <Link href="/scores">
-          <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
-            <CardContent className="p-6 flex flex-col items-center text-center gap-3">
-              <Target className="h-8 w-8 text-primary" />
-              <div>
-                <h3 className="font-semibold">分数线</h3>
-                <p className="text-sm text-muted-foreground">历年数据 + 目标拆解</p>
-              </div>
-            </CardContent>
-          </Card>
-        </Link>
+        )}
       </div>
     </div>
   );

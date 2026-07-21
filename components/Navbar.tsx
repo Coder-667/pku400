@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Settings, Wrench, Cpu, Sigma, TrendingUp, MessageSquare } from "lucide-react";
+import { Home, Wrench, Cpu, Sigma, TrendingUp, MessageSquare } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -11,7 +11,6 @@ const navItems = [
   { href: "/math", label: "数学一", icon: Sigma },
   { href: "/scores", label: "分数线", icon: TrendingUp },
   { href: "/qa", label: "问答", icon: MessageSquare },
-  { href: "/admin", label: "管理", icon: Settings },
   { href: "/tools", label: "工具", icon: Wrench },
 ];
 

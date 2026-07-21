@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CountdownTimer } from "@/components/CountdownTimer";
-import { BookOpen, Languages, Binary, Cpu, TrendingUp, Calendar, ExternalLink, Bell, CreditCard, MapPin, UserCheck } from "lucide-react";
+import { BookOpen, Languages, Binary, Cpu, TrendingUp, Calendar, ExternalLink, Bell, CreditCard, MapPin } from "lucide-react";
 import { target400 } from "@/lib/admission-data";
 
 const scoreMap = Object.fromEntries(target400.map((t) => [t.subject, t.targetScore]));
@@ -89,7 +89,7 @@ export default function MainHomePage() {
       {/* Countdown Hero */}
       <div className="text-center mb-8">
         <p className="text-sm text-muted-foreground mb-4">
-          距2026年全国硕士研究生招生考试初试
+          距2027年全国硕士研究生招生考试初试（2026年12月19—20日）
         </p>
         <CountdownTimer />
         <p className="text-lg font-bold mt-4 tracking-widest" style={{ color: "#9B1B30", fontFamily: "'STKaiti', 'KaiTi', 'Noto Serif SC', serif" }}>
@@ -98,54 +98,93 @@ export default function MainHomePage() {
       </div>
 
       {/* 考研大事记 */}
-      <Card className="mb-8 border-border max-w-2xl mx-auto">
+      <Card className="mb-8 border-border max-w-3xl mx-auto">
         <CardContent className="p-4 md:p-5">
-          <h3 className="text-sm font-bold mb-3 flex items-center gap-2">
+          <h3 className="text-sm font-bold mb-4 flex items-center gap-2">
             <Calendar className="h-4 w-4 text-primary" />
             考研大事记
-            <span className="text-xs text-muted-foreground font-normal">— 2026年</span>
+            <span className="text-xs text-muted-foreground font-normal">— 2027年（初试 2026.12.19—20）</span>
           </h3>
-          <div className="grid sm:grid-cols-2 gap-x-6 gap-y-1.5 text-sm">
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-muted-foreground w-14 shrink-0">9月中旬</span>
-              <span>招生简章/目录发布</span>
-              <a
-                href="https://www.ss.pku.edu.cn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-primary hover:underline inline-flex items-center gap-0.5"
-              >
-                官网<ExternalLink className="h-2.5 w-2.5" />
-              </a>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-muted-foreground w-14 shrink-0">9月下旬</span>
-              <span>预报名</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-muted-foreground w-14 shrink-0">10月中</span>
-              <span>正式报名 + 缴费</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-muted-foreground w-14 shrink-0">11月初</span>
-              <span className="inline-flex items-center gap-1">
-                <UserCheck className="h-3 w-3" /> 网上确认
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-muted-foreground w-14 shrink-0">11月中</span>
-              <span className="text-amber-600 font-medium">肖八上市</span>
-              <span className="text-xs text-muted-foreground">（淘宝/京东提前加购）</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-muted-foreground w-14 shrink-0">12月初</span>
-              <span className="text-red-600 font-medium">肖四上市</span>
-              <span className="text-xs text-muted-foreground">（第一时间买，马上背）</span>
-            </div>
+
+          <div className="space-y-3 text-sm">
+            {[
+              {
+                time: "7月—9月初",
+                title: "高校发布招生简章/专业目录",
+                desc: "各高校陆续公布招生简章、专业目录、参考书目。重点关注北大软微是否调整考试科目、招生人数、学制。",
+                link: { href: "https://www.ss.pku.edu.cn", text: "软微官网" },
+              },
+              {
+                time: "8月下旬",
+                title: "教育部发布统考大纲/管理规定",
+                desc: "教育部发布《全国硕士研究生招生工作管理规定》和统考公共课大纲，明确报名、考试时间及政策变化。",
+              },
+              {
+                time: "9月中下旬",
+                title: "研招网网上咨询周",
+                desc: "登录研招网向目标院校咨询报考条件、招生政策等。建议提前准备好问题清单，避免临时遗漏。",
+              },
+              {
+                time: "10月上旬",
+                title: "网上预报名",
+                desc: "预计 10月10日—13日，每天 9:00—22:00。主要面向应届生，部分省份往届生也可参加。预报名成功并缴费后无需重复报名。",
+              },
+              {
+                time: "10月中下旬",
+                title: "网上正式报名 + 缴费",
+                desc: "预计 10月16日—27日，每天 9:00—22:00。所有考生必须完成，逾期不补。建议避开首尾高峰时段。",
+              },
+              {
+                time: "10月底—11月初",
+                title: "网上确认",
+                desc: "各省时间不同，一般 10月31日—11月5日。需上传证件照、身份证、学历证明等材料，未确认则报名无效。",
+              },
+              {
+                time: "11月上旬",
+                title: "肖八上市",
+                desc: "预计 11月10日左右。主要用于政治选择题模拟和全年时政查漏补缺，不必死背分析题。",
+                note: "淘宝/京东提前加购",
+              },
+              {
+                time: "12月初",
+                title: "肖四上市 + 准考证打印",
+                desc: "肖四约 12月5日—10日上市，分析题需重点背诵；准考证考前10天左右开放打印，建议多打几份备用。",
+                note: "第一时间买，马上背",
+              },
+              {
+                time: "12月19日—20日",
+                title: "全国硕士研究生招生考试初试",
+                desc: "上午 8:30—11:30，下午 14:00—17:00。19日上午政治、下午英语一；20日上午数学一、下午408。",
+              },
+            ].map((event) => (
+              <div key={event.title} className="flex gap-3">
+                <span className="w-24 shrink-0 text-xs font-semibold text-primary pt-0.5">{event.time}</span>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="font-medium">{event.title}</span>
+                    {event.link && (
+                      <a
+                        href={event.link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-primary hover:underline inline-flex items-center gap-0.5"
+                      >
+                        {event.link.text}
+                        <ExternalLink className="h-2.5 w-2.5" />
+                      </a>
+                    )}
+                    {event.note && (
+                      <span className="text-xs text-muted-foreground">（{event.note}）</span>
+                    )}
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{event.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
 
           {/* 报名信息速查 */}
-          <div className="mt-3 pt-3 border-t border-border grid sm:grid-cols-3 gap-x-6 gap-y-1 text-xs text-muted-foreground">
+          <div className="mt-4 pt-3 border-t border-border grid sm:grid-cols-3 gap-x-6 gap-y-1 text-xs text-muted-foreground">
             <div className="flex items-center gap-1.5">
               <Bell className="h-3 w-3 shrink-0" />
               <span>报考单位：北京大学（10001）</span>
@@ -185,7 +224,7 @@ export default function MainHomePage() {
           目标<span className="text-primary">400</span>分 — 不是口号，是每天每科都要算的账
         </p>
         <p className="text-sm text-muted-foreground mt-1">
-          2024考研录取均分397，中位数396。400分是稳妥上岸的底线。
+          2026考研复试线378分，录取均分395，中位数393，报考约2800人。400分仍是稳妥上岸的底线。
         </p>
         <Link
           href="/scores"
